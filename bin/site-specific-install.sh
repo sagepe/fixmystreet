@@ -26,14 +26,19 @@ misuse() {
 [ -z "$DISTRIBUTION" ] && misuse DISTRIBUTION
 [ -z "$VERSION" ] && misuse VERSION
 [ -z "$DEVELOPMENT_INSTALL" ] && misuse DEVELOPMENT_INSTALL
+[ -z "$DOCKER" ] && misuse DOCKER
+[ -z "$INSTALL_DB" ] && misue INSTALL_DB
+[ -z "$INSTALL_POSTFIX" ] && misuse INSTALL_POSTFIX
 
 add_locale cy_GB
 add_locale nb_NO
 add_locale de_CH
 
-install_postfix
+if [ $INSTALL_POSTFIX = true ]; then
+    install_postfix
+fi
 
-if [ ! "$DEVELOPMENT_INSTALL" = true ]; then
+if [ ! "$DEVELOPMENT_INSTALL" = true ] && [ ! "$DOCKER" = true ]; then
     install_nginx
     add_website_to_nginx
     # Check out the current released version
