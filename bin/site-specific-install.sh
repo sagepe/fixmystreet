@@ -38,7 +38,11 @@ if [ $INSTALL_POSTFIX = true ]; then
     install_postfix
 fi
 
-if [ ! "$DEVELOPMENT_INSTALL" = true ] && [ ! "$DOCKER" = true ]; then
+if [ $DOCKER = true ]; then
+    # We need this to run the production version of the app server.
+    echo -n "Installing libfcgi-procmanager-perl..."
+    DEBIAN_FRONTEND=noninteractive apt-get install -qq -y libfcgi-procmanager-perl
+elif [ ! "$DEVELOPMENT_INSTALL" = true ]; then
     install_nginx
     add_website_to_nginx
     # Check out the current released version
