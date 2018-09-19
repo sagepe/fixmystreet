@@ -53,9 +53,11 @@ install_website_packages
 
 su -l -c "touch '$DIRECTORY/admin-htpasswd'" "$UNIX_USER"
 
-add_postgresql_user
+if [ $INSTALL_DB = true ]; then
+    add_postgresql_user
+fi
 
-export DEVELOPMENT_INSTALL
+export DEVELOPMENT_INSTALL DOCKER INSTALL_DB
 su -c "$REPOSITORY/bin/install-as-user '$UNIX_USER' '$HOST' '$DIRECTORY'" "$UNIX_USER"
 
 if [ ! "$DEVELOPMENT_INSTALL" = true ]; then
