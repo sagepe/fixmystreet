@@ -2,7 +2,6 @@ make
 g++
 jhead
 liblocale-gettext-perl
-memcached
 perl
 perlmagick
 libmath-bigint-gmp-perl
