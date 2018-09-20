@@ -72,7 +72,7 @@ then
     overwrite_rc_local
 fi
 
-if [ ! "$DEVELOPMENT_INSTALL" = true ]; then
+if [ ! "$DEVELOPMENT_INSTALL" = true ] && [ ! "$DOCKER" = true ]; then
     # Tell the user what to do next:
 
     echo Installation complete - you should now be able to view the site at:
